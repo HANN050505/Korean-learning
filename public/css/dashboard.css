@@ -1,0 +1,32 @@
+.sidebar {
+    background-color: #9ff0c8;
+}
+
+.sidebar .nav-link {
+    color: black;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 16px;
+}
+
+.sidebar .nav-link.active {
+    background-color: #00c853;
+    color: white;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #7be6b0;
+}
+
+.icon-menu {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.logo {
+    width: 50px;          
+    height: auto;
+    margin-left: 1px;    
+    margin-top: 20px;     
+}
