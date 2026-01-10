@@ -1,0 +1,74 @@
+/* WRAPPER */
+.hangeul-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.hangeul-header {
+    margin-bottom: 28px;
+}
+
+.hangeul-header h1 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.hangeul-header p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* TITLE DENGAN GARIS */
+.hangeul-section-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.hangeul-section-title span {
+    flex: 1;
+    height: 2px;
+    background: #000;
+}
+
+.hangeul-section-title h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* GRID */
+.hangeul-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 34px;
+   
+}
+
+/* CARD */
+.hangeul-card {
+    border: 2px solid #000;
+    border-radius: 14px;
+    padding: 16px 30px;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.hangeul-card:hover {
+    background: #f5fff8;
+}
+
+/* HURUF */
+.hangeul-card .huruf {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+/* LATIN */
+.hangeul-card .latin {
+    margin-top: 4px;
+    font-size: 30px;
+}

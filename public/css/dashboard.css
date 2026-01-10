@@ -19,14 +19,15 @@
 }
 
 .icon-menu {
-    width: 30px;
-    height: 30px;
+    width: 55px;
+    height: 55px;
     object-fit: contain;
 }
 
 .logo {
-    width: 50px;          
+    width: 60px;          
     height: auto;
     margin-left: 1px;    
     margin-top: 20px;     
 }
+
