@@ -1,0 +1,70 @@
+.hangeul-wrapper {
+    width: 100%;
+    max-width: 100%;      
+    box-sizing: border-box;
+}
+
+main {
+    height: 1px;
+}
+
+.lessons-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    padding: 35px 25px;   
+    margin-left: -24px;
+    margin-right: -24px;
+}
+
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 30px; 
+    padding-bottom: 50px; 
+    margin-left: 40px; 
+    margin-right: 20px; 
+}
+
+
+.lessons-card {
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    background: #fff; 
+    margin: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+    box-shadow: 0 8px 10px #9ff0c8;
+    border-bottom: 5px solid #9ff0c8; 
+}
+
+
+.lessons-card:hover {
+    transform: translateY(-5px);
+    border-color: #00ff11; 
+}
+
+
+.lessons-img {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.lessons-img img {
+    max-height: 100px;
+    width: auto;
+}
+
+
+
+
+

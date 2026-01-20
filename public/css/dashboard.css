@@ -1,12 +1,29 @@
 .sidebar {
     background-color: #9ff0c8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    overflow: hidden;
 }
+
+main.col-9,
+main.col-md-10 {
+    margin-left: 400px;                 
+    width: calc(100% - 400px);          
+    min-height: 100vh;
+    overflow-y: auto;
+    margin-top: -24px;
+    
+}
+
 
 .sidebar .nav-link {
     color: black;
     border-radius: 30px;
     padding: 12px 20px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .sidebar .nav-link.active {

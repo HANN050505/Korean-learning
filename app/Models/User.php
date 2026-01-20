@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Vocabulary;
+use App\Models\QuizResult;
 
 class User extends Authenticatable
 {
@@ -18,10 +20,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+    'name',
+    'email',
+    'password',
+    'is_premium',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +49,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+
+
+
+public function learnedVocabularies()
+{
+    return $this->belongsToMany(
+        Vocabulary::class,
+        'user_vocabulary_progress'
+    )->withTimestamps();
+}
+
+public function quizResults()
+{
+    return $this->hasMany(QuizResult::class);
+}
+
 }

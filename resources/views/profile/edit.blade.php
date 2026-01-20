@@ -12,15 +12,20 @@
         <img src="{{ asset('images/icons/profile.png') }}" class="profile-avatar me-3">
 
         <div class="profile-info">
-            <h5 class="mb-0">{{ Auth::user()->name }}</h5>
-            <small class="text-muted">Pengguna Gratis</small>
+    @if(auth()->user()->is_premium)
+        <small class="text-success fw-semibold">⭐ Pengguna Premium</small>
+    @else
+        <small class="text-muted">Pengguna Gratis</small>
 
-            <div class="mt-2">
-                <button class="btn btn-warning btn-sm">
-                    ⭐ Upgrade ke Premium
-                </button>
-            </div>
+        <div class="mt-2">
+            {{-- PERUBAHAN ADA DI SINI --}}
+            {{-- Mengarahkan ke route checkout yang sudah kita buat --}}
+            <a href="{{ route('payment.checkout') }}" class="btn btn-warning btn-sm">
+                ⭐ Upgrade ke Premium
+            </a>
         </div>
+    @endif
+</div>
 
         <a href="#" class="ms-auto edit-icon">
             <img src="{{ asset('images/icons/edit.png') }}" class="profile-side" >

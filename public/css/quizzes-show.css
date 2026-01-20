@@ -1,0 +1,118 @@
+/* CONTAINER UTAMA (UPDATE: LEBIH TENGAH) */
+.quiz-container {
+    padding: 20px;
+    max-width: 700px; /* Tetap besar */
+    margin: 0 auto;   /* Tengah secara horizontal (kiri-kanan) */
+    
+    /* LOGIKA TENGAH VERTIKAL (ATAS-BAWAH) */
+    min-height: calc(100vh - 100px); /* Tinggi layar dikurangi estimasi tinggi navbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* Tengah Kiri-Kanan */
+    justify-content: center; /* Tengah Atas-Bawah */
+}
+
+/* Pastikan Slide juga lebar penuh agar align-items bekerja rapi */
+.quiz-slide {
+    display: none; 
+    width: 100%; /* Memastikan lebar penuh mengikuti container */
+    animation: fadeIn 0.5s;
+}
+
+
+.quiz-slide.active {
+    display: block; 
+}
+
+/* KARTU SOAL (BAGIAN ATAS) */
+.question-card {
+    background-color: #F3EFFF; 
+    border: 3px solid #000; /* DIPERTEBAL: Sebelumnya 2px */
+    border-radius: 25px;    /* DIPERBESAR: Sebelumnya 20px */
+    padding: 40px;          /* DIPERBESAR: Sebelumnya 30px */
+    text-align: center;
+    margin-bottom: 40px;    /* Jarak bawah ditambah */
+    box-shadow: 8px 8px 0px #000; /* Bayangan lebih tebal */
+}
+
+.image-wrapper img {
+    max-width: 250px;      /* DIPERBESAR: Sebelumnya 150px */
+    height: auto;
+    margin-bottom: 25px;
+}
+
+.question-text {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 36px;       /* DIPERBESAR: Sebelumnya 28px */
+    color: #000;
+    margin: 0;
+    line-height: 1.3;      /* Tambahan agar spasi baris enak dibaca */
+}
+
+/* GRID PILIHAN JAWABAN */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;             /* Jarak antar tombol diperlebar */
+}
+
+.quiz-option {
+    background-color: #fff;
+    border: 3px solid #000; /* Border lebih tebal */
+    border-radius: 60px;    /* Lebih bulat */
+    padding: 20px 15px;     /* DIPERBESAR: Agar tombol lebih tinggi */
+    font-size: 20px;        /* DIPERBESAR: Sebelumnya 16px */
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    text-align: center;
+}
+
+.quiz-option:hover {
+    transform: translateY(-4px); /* Efek naik lebih tinggi */
+    background-color: #f2ff00;
+}
+
+/* STATE WARNA JAWABAN */
+.quiz-option.correct {
+    background-color: #00ff26 !important; 
+    color: black;
+    border-color: black;
+}
+
+.quiz-option.wrong {
+    background-color: #FF6B6B !important; 
+    color: white;
+    border-color: black;
+    cursor: not-allowed;
+}
+
+/* BUTTON FINISH */
+.btn-finish {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;     /* Diperbesar */
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 18px;        /* Font diperbesar */
+}
+
+/* ANIMASI MASUK */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIF UNTUK HP KECIL */
+@media (max-width: 600px) {
+    .options-grid {
+        grid-template-columns: 1fr; /* Di HP jadi 1 kolom saja biar tombol besar */
+    }
+    .question-text {
+        font-size: 28px; /* Di HP font agak dikecilkan sedikit biar muat */
+    }
+}

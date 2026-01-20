@@ -1,7 +1,8 @@
 .profile-wrapper {
     width: 100%;
-    margin: 0;
+    margin-top: 30px;
     box-sizing: border-box;
+    font-size: 25px;
 }
 
 .logout-form {
@@ -46,9 +47,14 @@
     height: 150px;
 }
 
-.profile-info h5 {
-    font-weight: 600;
+.mb-0 {
+    font-size: 50px;
+}
 
+.btn-warning.btn-sm {
+    font-size: 15px;
+    padding: 6px 12px;
+    border: 1px solid #000;
 }
 
 .profile-menu {
@@ -74,7 +80,8 @@
     text-decoration: none;
     background-color: #fff;
     color: #000;
-    border: 7px solid #d9f6d5;   
+    box-shadow: 0 8px 10px #9ff0c8;
+    border-bottom: 5px solid #9ff0c8;  
     margin-bottom: 32px;         
     box-sizing: border-box;
 }

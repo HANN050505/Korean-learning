@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hangeul.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/lessons.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lessons-show.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/quizzes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/progress.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/quizzes-show.css') }}">
 </head>
 <body>
+
 
 <div class="container-fluid">
     <div class="row vh-100">

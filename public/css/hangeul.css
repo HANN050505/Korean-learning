@@ -1,36 +1,44 @@
-/* WRAPPER */
+
 .hangeul-wrapper {
     width: 100%;
+    max-width: 100%;      
     box-sizing: border-box;
 }
 
 
+main {
+    height: 1px;
+}
+
 .hangeul-header {
-    margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    padding: 35px 25px; 
+    margin-left: -24px;
+    margin-right: -24px;
+
 }
 
-.hangeul-header h1 {
-    font-size: 28px;
-    margin-bottom: 7px;
-}
 
-.hangeul-header p {
-    margin: 0;
-    font-size: 16px;
-}
-
-/* TITLE DENGAN GARIS */
 .hangeul-section-title {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
 }
 
 .hangeul-section-title span {
     flex: 1;
-    height: 2px;
+    height: 3px;
     background: #000;
+}
+
+.hangeul-section-description {
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .hangeul-section-title h3 {
@@ -43,19 +51,28 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 34px;
+    margin-bottom: 50px;
+    
    
 }
 
-/* CARD */
 .hangeul-card {
-    border: 2px solid #000;
+
     border-radius: 14px;
     padding: 16px 30px;
     text-align: center;
     background: #fff;
     cursor: pointer;
     transition: 0.2s ease;
+    box-shadow: 0 8px 10px #9ff0c8;
+    border-bottom: 5px solid #9ff0c8;  
 }
+
+.hangeul-card:active {
+    transform: scale(0.95);
+    background: #eafff1;
+}
+
 
 .hangeul-card:hover {
     background: #f5fff8;
