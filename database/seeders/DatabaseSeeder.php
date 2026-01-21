@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     $this->call(LessonKataBendaSeeder::class);
     $this->call(LessonKataBuahSeeder::class);
     $this->call(QuizKataBuahSeeder::class);
+    $this->call(AdminSeeder::class);
 }
 
 }

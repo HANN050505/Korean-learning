@@ -1,29 +1,35 @@
+/* === SIDEBAR BASIC === */
 .sidebar {
     background-color: #9ff0c8;
     position: fixed;
     top: 0;
     left: 0;
-    width: 400px;
+    width: 400px; /* Lebar Awal */
     height: 100vh;
     overflow: hidden;
+    z-index: 1000;
+    transition: width 0.3s ease; /* ANIMASI HALUS */
 }
 
-main.col-9,
-main.col-md-10 {
-    margin-left: 400px;                 
-    width: calc(100% - 400px);          
+/* === MAIN CONTENT === */
+main#main-content {
+    margin-left: 400px; /* Jarak Awal */
+    width: calc(100% - 400px);
     min-height: 100vh;
     overflow-y: auto;
-    margin-top: -24px;
-    
+    transition: all 0.3s ease; /* ANIMASI HALUS */
+    margin-top: -27px;
 }
 
-
+/* === ICON & LINK STYLES === */
 .sidebar .nav-link {
     color: black;
     border-radius: 30px;
     padding: 12px 20px;
     font-size: 20px;
+    white-space: nowrap; /* Biar teks gak turun baris pas mengecil */
+    overflow: hidden;
+    transition: all 0.2s;
 }
 
 .sidebar .nav-link.active {
@@ -39,12 +45,51 @@ main.col-md-10 {
     width: 55px;
     height: 55px;
     object-fit: contain;
+    min-width: 55px; /* Kunci ukuran icon biar gak gepeng */
 }
 
 .logo {
-    width: 60px;          
+    width: 60px;
     height: auto;
-    margin-left: 1px;    
-    margin-top: 20px;     
+    cursor: pointer;
+    transition: transform 0.3s;
 }
 
+/* =========================================
+   LOGIKA SAAT SIDEBAR MENYEMPIT (COLLAPSED)
+   ========================================= */
+
+/* 1. Kecilkan Lebar Sidebar jadi 110px */
+body.sidebar-collapsed .sidebar {
+    width: 110px;
+}
+
+/* 2. Sesuaikan Margin Konten Utama */
+body.sidebar-collapsed main#main-content {
+    margin-left: 110px;
+    width: calc(100% - 110px);
+}
+
+/* 3. Sembunyikan Teks Menu */
+body.sidebar-collapsed .link-text {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    display: none; /* Hilangkan total dari layout */
+}
+
+/* 4. Tengahkan Icon di tengah sidebar kecil */
+body.sidebar-collapsed .sidebar .nav-link {
+    justify-content: center; /* Icon jadi di tengah */
+    padding: 12px 0; /* Kurangi padding kiri-kanan */
+}
+
+body.sidebar-collapsed .sidebar .nav-link img {
+    margin: 0 !important; /* Hapus margin icon */
+}
+
+/* 5. Tengahkan Logo Burger juga */
+body.sidebar-collapsed #sidebarToggle {
+    text-align: center;
+    width: 100%;
+}

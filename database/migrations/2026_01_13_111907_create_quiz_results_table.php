@@ -6,25 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-    Schema::create('quiz_results', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-    $table->foreignId('quiz_id')->constrained()->cascadeOnDelete();
-    $table->integer('correct');
-    $table->integer('wrong');
-    $table->timestamps();
-});
-
+        Schema::create('quiz_results', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('quiz_id')->constrained()->cascadeOnDelete();
+            
+            // --- PERBAIKAN DISINI ---
+            $table->integer('score'); // <--- WAJIB ADA untuk menyimpan nilai 0-100
+            
+            // Kita buat nullable dulu supaya tidak error kalau datanya belum dikirim
+            $table->integer('correct')->nullable(); 
+            $table->integer('wrong')->nullable();
+            
+            $table->timestamps();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('quiz_results');

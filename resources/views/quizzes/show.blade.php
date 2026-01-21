@@ -9,7 +9,6 @@
             
             {{-- KARTU SOAL --}}
             <div class="question-card {{ $question->icon ? '' : 'text-only' }}">
-                
                 @if($question->icon)
                     <div class="image-wrapper">
                         <img src="{{ asset('images/' . $question->icon) }}" alt="Ilustrasi">
@@ -19,7 +18,7 @@
                 <h2 class="question-text">{{ $question->question }}</h2>
             </div>
 
-            {{-- PILIHAN JAWABAN --}}
+            {{-- OPSI JAWABAN --}}
             <div class="options-grid" id="options-{{ $index }}">
                 @foreach ($question->options as $option)
                     <button 
@@ -30,26 +29,40 @@
                 @endforeach
             </div>
 
+            {{-- --- BARU: TAMPILAN NILAI SEMENTARA --- --}}
+            <div style="margin-top: 20px; text-align: center; font-size: 1rem; color: #7f8c8d;">
+                Nilai saat ini: <strong><span class="live-score">0</span></strong>
+            </div>
+
         </div>
     @endforeach
 
     {{-- LAYAR SELESAI --}}
     <div id="quiz-completed" class="quiz-slide">
         <div class="question-card text-only" style="text-align: center;">
-            <h2>🎉 Selesai! 🎉</h2>
+            <h2>🎉 Hasil Kuis 🎉</h2>
             <p>Kamu telah menyelesaikan kuis ini.</p>
             
-            {{-- Statistik Hasil --}}
             <div style="margin: 20px 0; font-size: 1.2rem;">
-                <div style="color: #2ecc71; margin-bottom: 10px;">
-                    <strong>Benar: <span id="total-correct">0</span></strong>
+                {{-- Detail Benar Salah --}}
+                <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+                    <div style="color: #2ecc71;">Benar: <span id="total-correct">0</span></div>
+                    <div style="color: #e74c3c;">Salah: <span id="total-wrong">0</span></div>
                 </div>
-                <div style="color: #e74c3c;">
-                    <strong>Salah: <span id="total-wrong">0</span></strong>
+
+                <hr style="opacity: 0.3; margin: 10px 0;">
+
+                {{-- Tampilan Skor Akhir --}}
+                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px;">
+                    Nilai Akhir: <span id="final-score">0</span>
+                </div>
+
+                {{-- Status Lulus/Gagal (Selesai / Belum) --}}
+                <div id="status-text" style="font-weight: bold; font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase;">
+                    {{-- Teks diisi Javascript --}}
                 </div>
             </div>
 
-            <br>
             <a href="{{ route('quizzes.index') }}" 
             class="quiz-option correct" 
             style="text-decoration: none; display:inline-block; width: auto; padding: 15px 30px;">
@@ -60,60 +73,110 @@
 
 </div>
 
-{{-- JAVASCRIPT LOGIC --}}
+{{-- JAVASCRIPT --}}
 <script>
-    // Inisialisasi penghitung skor
     let correctCount = 0;
     let wrongCount = 0;
 
     function checkAnswer(button, isCorrect, currentIndex, totalQuestions) {
-        // 1. Cegah klik ganda pada soal yang sama
         const optionsContainer = document.getElementById('options-' + currentIndex);
         const allButtons = optionsContainer.getElementsByTagName('button');
         
-        // Loop untuk mematikan fungsi klik (disabled) pada semua tombol di slide ini
+        // Disable tombol setelah klik
         for (let btn of allButtons) {
             btn.disabled = true; 
-            btn.style.pointerEvents = 'none'; // Tambahan visual agar cursor tidak berubah
-            btn.style.opacity = '0.6'; // Efek visual tombol non-aktif
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.6';
         }
         
-        // Kembalikan opacity tombol yang diklik supaya tetap jelas
         button.style.opacity = '1';
 
-        // 2. Cek Jawaban & Update Skor
         if (isCorrect) {
             button.classList.add('correct');
-            correctCount++; // Tambah poin benar
+            correctCount++;
         } else {
             button.classList.add('wrong');
-            wrongCount++; // Tambah poin salah
+            wrongCount++;
         }
 
-        // 3. Pindah ke Soal Berikutnya (Benar atau Salah tetap jalan)
+        // --- BARU: UPDATE NILAI SEMENTARA SECARA LIVE ---
+        let currentScore = Math.round((correctCount / totalQuestions) * 100);
+        // Update semua elemen dengan class 'live-score'
+        document.querySelectorAll('.live-score').forEach(function(el) {
+            el.innerText = currentScore;
+        });
+
+        // Pindah slide otomatis setelah 800ms
         setTimeout(() => {
-            // Sembunyikan soal saat ini
             document.getElementById('question-' + currentIndex).classList.remove('active');
             
             let nextIndex = currentIndex + 1;
 
             if (nextIndex < totalQuestions) {
-                // Tampilkan soal berikutnya
                 document.getElementById('question-' + nextIndex).classList.add('active');
             } else {
-                // Kuis Selesai: Tampilkan Layar Akhir & Update Angka
-                showResults();
+                showResults(); // Panggil fungsi selesai
             }
-        }, 800); // Jeda 800ms
+        }, 800);
     }
 
     function showResults() {
-        // Update teks HTML dengan variabel JS
+        // 1. Update HTML Angka
         document.getElementById('total-correct').innerText = correctCount;
         document.getElementById('total-wrong').innerText = wrongCount;
+        
+        // 2. Hitung Persentase (Skor 0 - 100)
+        let totalQuestions = {{ count($quiz->questions) }};
+        let score = 0;
+        if(totalQuestions > 0){
+            score = Math.round((correctCount / totalQuestions) * 100);
+        }
+        
+        document.getElementById('final-score').innerText = score;
 
-        // Tampilkan slide selesai
+        // 3. Logika Lulus (> 80) -> Ubah teks jadi "Selesai" atau "Belum"
+        const statusElement = document.getElementById('status-text');
+        
+        if (score > 80) {
+            // Jika Lulus
+            statusElement.innerText = "Selesai";
+            statusElement.style.color = "#2ecc71"; // Hijau
+        } else {
+            // Jika Gagal
+            statusElement.innerText = "Belum";
+            statusElement.style.color = "#e74c3c"; // Merah
+        }
+        
+        // Tampilkan layar selesai
         document.getElementById('quiz-completed').classList.add('active');
+
+        // 4. Kirim ke Database
+        saveScoreToDatabase(score);
+    }
+
+    function saveScoreToDatabase(score) {
+        // Kita kirim score, correctCount, dan wrongCount
+        fetch("{{ route('quizzes.store', $quiz->id) }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            // Update body jadi seperti ini:
+            body: JSON.stringify({ 
+                score: score,
+                correct: correctCount, // Variabel global di atas
+                wrong: wrongCount      // Variabel global di atas
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error("Gagal save:", response.statusText);
+            } else {
+                console.log("Berhasil disimpan!");
+            }
+        })
+        .catch(error => console.error("Error:", error));
     }
 </script>
 @endsection

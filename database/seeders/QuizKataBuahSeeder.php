@@ -25,7 +25,7 @@ class QuizKataBuahSeeder extends Seeder
         // Kita pakai firstOrCreate agar tidak duplikat jika di-seed ulang
         $quiz = Quiz::firstOrCreate(
             ['lesson_id' => $lesson->id],
-            ['title' => 'Quiz Buah-buahan']
+            ['title' => 'Quiz Kata Buah']
         );
 
         // 3. DATA SOAL (Campuran Gambar & Teks)

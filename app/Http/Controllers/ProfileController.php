@@ -57,4 +57,20 @@ class ProfileController extends Controller
 
         return Redirect::to('/login');
     }
+
+    /**
+     * Menampilkan halaman Informasi Aplikasi.
+     */
+    public function about()
+    {
+        return view('profile.about');
+    }
+
+    /**
+     * Menampilkan halaman Pusat Bantuan.
+     */
+    public function help()
+    {
+        return view('profile.help');
+    }
 }

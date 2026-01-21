@@ -11,15 +11,17 @@
     <div class="profile-header d-flex align-items-center mb-4">
         <img src="{{ asset('images/icons/profile.png') }}" class="profile-avatar me-3">
 
-        <div class="profile-info">
+       <div class="profile-info">
+    
+    {{-- [BARU] Menampilkan Nama User --}}
+    <h5 class="fw-bold mb-1">{{ auth()->user()->name }}</h5> 
+
     @if(auth()->user()->is_premium)
         <small class="text-success fw-semibold">⭐ Pengguna Premium</small>
     @else
         <small class="text-muted">Pengguna Gratis</small>
 
         <div class="mt-2">
-            {{-- PERUBAHAN ADA DI SINI --}}
-            {{-- Mengarahkan ke route checkout yang sudah kita buat --}}
             <a href="{{ route('payment.checkout') }}" class="btn btn-warning btn-sm">
                 ⭐ Upgrade ke Premium
             </a>
@@ -35,12 +37,12 @@
     {{-- Menu Box --}}
     <div class="profile-menu">
 
-        <a href="#" class="profile-item">
+        <a href="{{ route('profile.about') }}" class="profile-item">
             <img src="{{ asset('images/icons/info.png') }}" class="item-img">
             <span>Informasi Aplikasi</span>
             <img src="{{ asset('images/icons/arrow.png') }}" class="arrow">
         </a>
-        <a href="#" class="profile-item">
+        <a href="{{ route('profile.help') }}" class="profile-item">
             <img src="{{ asset('images/icons/settings.png') }}" class="item-img">
             <span>Pusat Bantuan</span>
             <img src="{{ asset('images/icons/arrow.png') }}" class="arrow">

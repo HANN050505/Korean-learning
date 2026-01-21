@@ -4,7 +4,7 @@ body {
     background-color: #f2f2f2;
 }
 
-.container {
+.custom-container {
     display: flex;
     height: 100vh;
 }

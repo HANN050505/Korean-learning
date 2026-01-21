@@ -8,15 +8,13 @@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body text-center p-5">
-                    <img src="{{ asset('images/icons/premium-badge.png') }}" alt="Premium" width="80" class="mb-3">
-                    
                     <h3 class="fw-bold mb-2">Upgrade Premium</h3>
                     <p class="text-muted mb-4">Akses semua materi tanpa batas!</p>
                     <h2 class="text-primary fw-bold mb-4">Rp 50.000</h2>
 
                     <div class="d-grid gap-2">
                         <button id="pay-button" class="btn btn-success btn-lg rounded-pill shadow-lg">
-                            🚀 Bayar Sekarang
+                            Bayar Sekarang
                         </button>
                         <a href="{{ url()->previous() }}" class="btn btn-link text-muted">Batal</a>
                     </div>
