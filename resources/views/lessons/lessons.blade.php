@@ -8,10 +8,17 @@
 
 <div class="quizzes-wrapper">
 
-    <div class="quizzes-header">
-        <h1>Lessons</h1>
-        <p>Pelajari huruf dalam Bahasa Korea</p>
+    <div class="quizzes-header" style="display: flex; justify-content: space-between; align-items: center;">
+        {{-- Bagian Kiri: Teks Judul --}}
+        <div>
+            <h1>Lessons</h1>
+            <p>Pelajari huruf dalam Bahasa Korea</p>
+        </div>
+        {{-- Bagian Kanan: Logo --}}
+        <img src="{{ asset('images/icons/korea.png') }}" alt="Korea Logo" style="width: 70px; height: auto;">
+        
     </div>
+    
 
 <div class="lessons-grid">
     @foreach ($lessons as $lesson)

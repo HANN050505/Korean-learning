@@ -4,9 +4,16 @@
 
 @section('content')
 <div class="progress-wrapper">
-    <div class="progress-header">
-        <h1>Beranda</h1>
+
+    <div class="progress-header" style="display: flex; justify-content: space-between; align-items: center;">
+        {{-- Bagian Kiri: Teks Judul --}}
+        <div>
+            <h1>Progress</h1>
         <p>Statistik kelulusan kuis bahasa Korea kamu</p>
+        </div>
+        {{-- Bagian Kanan: Logo --}}
+        <img src="{{ asset('images/icons/korea.png') }}" alt="Korea Logo" style="width: 70px; height: auto;">
+        
     </div>
 
     <div class="progress-progress">

@@ -6,7 +6,6 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PaymentController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
 // --- HALAMAN PUBLIK ---
@@ -14,33 +13,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// --- HALAMAN VERIFIKASI EMAIL (Hanya butuh Login, TIDAK butuh Verified) ---
-Route::middleware('auth')->group(function () {
-    
-    // 1. Tampilkan Halaman "Silakan Cek Email"
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email'); 
-    })->name('verification.notice');
-
-    // 2. Proses saat Link di Email diklik (Handler)
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill(); // Tandai user sudah verifikasi
-        return redirect('/home'); // Lempar ke dashboard
-    })->middleware('signed')->name('verification.verify');
-
-    // 3. Tombol "Kirim Ulang Email"
-    Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', 'Link verifikasi baru telah dikirim!');
-    })->middleware('throttle:6,1')->name('verification.send');
-});
-
-
-// --- HALAMAN UTAMA (Wajib Login DAN Wajib Verified) ---
-Route::middleware(['auth', 'verified'])->group(function () {
+// --- HALAMAN UTAMA (Hanya Wajib Login) ---
+// Note: 'verified' sudah dihapus, jadi user baru daftar bisa langsung masuk sini.
+Route::middleware(['auth'])->group(function () {
 
     // 1. Dashboard / Home
-    // Saya pilih yang pakai Controller karena lebih rapi & logic ada di sana
     Route::get('/home', [ProgressController::class, 'home'])->name('home');
 
     // 2. Materi Hangeul
@@ -76,12 +53,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // --- ADMIN ROUTES ---
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/home', function () {
+        return view('admin.home');
+    })->name('admin.home');
 });
 
-// --- PAYMENT CALLBACK (Tanpa Auth) ---
+// --- PAYMENT CALLBACK (Tanpa Auth - Biar Midtrans bisa akses) ---
 Route::post('/payment/callback', [PaymentController::class, 'callback']);
 
 require __DIR__.'/auth.php';

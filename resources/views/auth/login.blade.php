@@ -18,7 +18,14 @@
 
     <div class="right">
         <div class="login-box">
-            <h2>Welcome</h2>
+            
+            {{-- 1. TAMBAHAN: Teks K-CLASS di Header --}}
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-weight: bold; margin: 0;">K-CLASS</h2>
+            </div>
+
+            {{-- Kamu bisa menghapus <h2>Welcome</h2> di bawah ini jika ingin persis seperti desain --}}
+            {{-- <h2>Welcome</h2> --}}
 
             @if ($errors->any())
                 <div class="error">
@@ -48,6 +55,12 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up</a>
                 </div>
             </form>
+
+            {{-- 2. TAMBAHAN: Logo Korea di Bawah --}}
+            <div style="text-align: center; margin-top: 30px;">
+                <img src="{{ asset('images/icons/korea.png') }}" alt="Logo" style="width: 80px; height: auto;">
+            </div>
+
         </div>
     </div>
 </div>

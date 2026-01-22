@@ -5,9 +5,15 @@
 @section('content')
 <div class="home-wrapper">
 
-    <div class="home-header">
-        <h1>Beranda</h1>
-        <p>Biar aku aja yang isi kalimatnya</p>
+    <div class="home-header" style="display: flex; justify-content: space-between; align-items: center;">
+        {{-- Bagian Kiri: Teks Judul --}}
+        <div>
+            <h1>Beranda</h1>
+            <p>Biar aku aja yang isi kalimatnya</p>
+        </div>
+        {{-- Bagian Kanan: Logo --}}
+        <img src="{{ asset('images/icons/korea.png') }}" alt="Korea Logo" style="width: 70px; height: auto;">
+        
     </div>
 
     <div class="home-welcome">

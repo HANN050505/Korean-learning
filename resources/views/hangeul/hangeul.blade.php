@@ -5,9 +5,16 @@
 @section('content')
 <div class="hangeul-wrapper">
 
-    <div class="hangeul-header">
-        <h1>Hangeul</h1>
-        <p>Pelajari huruf dalam Bahasa Korea</p>
+
+    <div class="hangeul-header" style="display: flex; justify-content: space-between; align-items: center;">
+        {{-- Bagian Kiri: Teks Judul --}}
+        <div>
+            <h1>Hangeul</h1>
+            <p>Pelajari huruf dalam Bahasa Korea</p>
+        </div>
+        {{-- Bagian Kanan: Logo --}}
+        <img src="{{ asset('images/icons/korea.png') }}" alt="Korea Logo" style="width: 70px; height: auto;">
+        
     </div>
 
     <div class="hangeul-section-title">
