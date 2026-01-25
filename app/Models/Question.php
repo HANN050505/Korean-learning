@@ -15,6 +15,7 @@ class Question extends Model
         'icon', // <-- Kolom baru ditambahkan
     ];
 
+    // app/Models/Question.php
     public function options()
     {
         return $this->hasMany(Option::class);

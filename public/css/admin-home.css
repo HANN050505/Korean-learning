@@ -1,0 +1,42 @@
+main {
+    height: 1px;
+}
+
+.home-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    padding: 35px 25px; 
+    margin-left: -24px;
+    margin-right: -24px;
+    background-image: url('/images/icons/Welcome.png');
+    background-size: 2000px;
+    background-position-y: -24px;
+    background-position-x: -330px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.card-stat {
+        border: none;
+        border-radius: 12px;
+        color: white;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        height: 100%;
+    }
+    .card-stat:hover { transform: translateY(-5px); }
+    .bg-primary-soft { background: linear-gradient(45deg, #4e73df, #224abe); }
+    .bg-success-soft { background: linear-gradient(45deg, #1cc88a, #13855c); }
+    .bg-info-soft    { background: linear-gradient(45deg, #36b9cc, #258391); }
+    .bg-warning-soft { background: linear-gradient(45deg, #f6c23e, #dda20a); }
+    
+    .table-card {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }

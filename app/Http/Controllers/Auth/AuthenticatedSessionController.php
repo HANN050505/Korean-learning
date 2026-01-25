@@ -30,7 +30,7 @@ public function store(LoginRequest $request): RedirectResponse
     $user = auth()->user();
 
     if ($user->role === 'admin') {
-        return redirect('/admin/dashboard');
+        return redirect('/admin/home');
     }
 
     return redirect('/home');

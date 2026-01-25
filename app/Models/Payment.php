@@ -11,7 +11,6 @@ class Payment extends Model
 
     protected $table = 'payments';
 
-    // TAMBAHKAN INI AGAR FUNGSI CREATE() BERHASIL
     protected $fillable = [
         'user_id',
         'order_id',
@@ -19,4 +18,13 @@ class Payment extends Model
         'status',
         'snap_token'
     ];
+
+    // ==========================================
+    // WAJIB DITAMBAHKAN
+    // ==========================================
+    // Agar kita bisa mengambil nama user pembayar di halaman Admin
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

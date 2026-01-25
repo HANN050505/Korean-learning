@@ -19,8 +19,9 @@ main {
     margin-left: -24px;
     margin-right: -24px;
     background-image: url('/images/icons/Welcome.png');
+    background-size: 2000px;
     background-position-y: -24px;
-    background-position-x: -320px;
+    background-position-x: -330px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
