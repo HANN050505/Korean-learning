@@ -5,18 +5,23 @@
 @section('content')
 <div class="hangeul-wrapper">
 
-
-    <div class="hangeul-header" style="display: flex; justify-content: space-between; align-items: center;">
-        {{-- Bagian Kiri: Teks Judul --}}
+    {{-- HEADER --}}
+    <div class="hangeul-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <div>
-            <h1>Hangeul</h1>
-            <p>Pelajari huruf dalam Bahasa Korea</p>
+            <h1 class="h3 mb-2 text-gray-800">Hangeul</h1>
+            <p class="mb-4">Pelajari huruf dalam Bahasa Korea</p>
         </div>
-        {{-- Bagian Kanan: Logo --}}
         <img src="{{ asset('images/icons/korea.png') }}" alt="Korea Logo" style="width: 70px; height: auto;">
-        
     </div>
 
+    {{-- FITUR PENCARIAN --}}
+    <div class="search-container" style="margin-bottom: 30px;">
+        <input type="text" id="hangeulSearch" class="form-control" 
+            placeholder="Cari huruf... (contoh: a, wa, atau ㄱ)" 
+            style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #d1d3e2; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+    </div>
+
+    {{-- 1. VOKAL TUNGGAL --}}
     <div class="hangeul-section-title">
         <span></span>
         <h3>Vokal Tunggal</h3>
@@ -39,10 +44,6 @@
         <div class="hangeul-card" onclick="speak('ㅕ')">
             <div class="huruf">ㅕ</div>
             <div class="latin">yeo</div>
-        </div>
-        <div class="hangeul-card" onclick="speak('ㅏ')">
-            <div class="huruf">ㅏ</div>
-            <div class="latin">a</div>
         </div>
         <div class="hangeul-card" onclick="speak('ㅗ')">
             <div class="huruf">ㅗ</div>
@@ -84,9 +85,9 @@
             <div class="huruf">ㅖ</div>
             <div class="latin">ye</div>
         </div>
+    </div>
 
-</div>
-
+    {{-- 2. VOKAL GANDA --}}
     <div class="hangeul-section-title">
         <span></span>
         <h3>Vokal Ganda</h3>
@@ -122,8 +123,9 @@
             <div class="huruf">ㅢ</div>
             <div class="latin">ui</div>
         </div>
-</div>
+    </div>
 
+    {{-- 3. KONSONAN BIASA --}}
     <div class="hangeul-section-title">
         <span></span>
         <h3>Konsonan Biasa</h3>
@@ -135,7 +137,6 @@
             <div class="huruf">ㄱ</div>
             <div class="latin">g</div>
         </div>
-
         <div class="hangeul-card" onclick="speak('ㄴ')">
             <div class="huruf">ㄴ</div>
             <div class="latin">n</div>
@@ -173,8 +174,8 @@
             <div class="latin">h</div>
         </div>
     </div>
-    
 
+    {{-- 4. KONSONAN ASPIRASI --}}
     <div class="hangeul-section-title">
         <span></span>
         <h3>Konsonan Aspirasi</h3>
@@ -182,29 +183,29 @@
     </div>
 
     <div class="hangeul-section-description">
-    <h5>Konsonan-konsonan ini diucapkan dengan hembusan udara yang lebih kuat saat pengucapan.</h5>
+        <h5>Konsonan-konsonan ini diucapkan dengan hembusan udara yang lebih kuat saat pengucapan.</h5>
     </div>
 
-        <div class="hangeul-grid">
+    <div class="hangeul-grid">
         <div class="hangeul-card" onclick="speak('ㅊ')">
             <div class="huruf">ㅊ</div>
-            <div class="Aspirasi">ch</div>
+            <div class="latin">ch</div>
         </div>
         <div class="hangeul-card" onclick="speak('ㅋ')">
             <div class="huruf">ㅋ</div>
-            <div class="Aspirasi">k</div>
+            <div class="latin">k</div>
         </div>
         <div class="hangeul-card" onclick="speak('ㅌ')">
             <div class="huruf">ㅌ</div>
-            <div class="Aspirasi">t</div>
+            <div class="latin">t</div>
         </div>
         <div class="hangeul-card" onclick="speak('ㅍ')">
             <div class="huruf">ㅍ</div>
-            <div class="Aspirasi">p</div>
+            <div class="latin">p</div>
         </div>
     </div>
 
-
+    {{-- 5. KONSONAN BERTEKANAN --}}
     <div class="hangeul-section-title">
         <span></span>
         <h3>Konsonan Bertekanan</h3>
@@ -212,7 +213,7 @@
     </div>
 
     <div class="hangeul-section-description">
-    <h5>konsonan yang diucapkan dengan ketegangan otot mulut yang lebih kuat dan tanpa hembusan udara yang besar.</h5>
+        <h5>Konsonan yang diucapkan dengan ketegangan otot mulut yang lebih kuat dan tanpa hembusan udara yang besar.</h5>
     </div>
 
     <div class="hangeul-grid">
@@ -236,21 +237,75 @@
             <div class="huruf">ㅉ</div>
             <div class="latin">jj</div>
         </div>
-        </div>
-</div>
+    </div>
 
+</div> {{-- End hangeul-wrapper --}}
+
+{{-- JAVASCRIPT --}}
 <script>
-function speak(text) {
-    // hentikan suara sebelumnya kalau masih jalan
-    window.speechSynthesis.cancel();
+    // 1. Fungsi Text-to-Speech
+    function speak(text) {
+        window.speechSynthesis.cancel(); // Hentikan suara sebelumnya
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ko-KR'; // bahasa Korea
-    utterance.rate = 0.8;     // kecepatan (0.5 - 1 normal)
-    utterance.pitch = 1;      // nada suara
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR'; // Bahasa Korea
+        utterance.rate = 0.8;     // Kecepatan
+        utterance.pitch = 1;      // Nada
 
-    window.speechSynthesis.speak(utterance);
-}
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // 2. Fungsi Pencarian Real-time
+    document.getElementById('hangeulSearch').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let grids = document.querySelectorAll('.hangeul-grid');
+
+        grids.forEach(grid => {
+            let cards = grid.querySelectorAll('.hangeul-card');
+            let visibleCount = 0;
+
+            // Filter Kartu di dalam Grid ini
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    card.style.display = ""; // Tampilkan
+                    visibleCount++;
+                } else {
+                    card.style.display = "none"; // Sembunyikan
+                }
+            });
+
+            // Logic Menyembunyikan Judul & Deskripsi jika Grid kosong
+            // Ambil elemen sebelumnya (Biasanya Title atau Description)
+            let prevElement = grid.previousElementSibling;
+            let titleElement = null;
+            let descElement = null;
+
+            // Cek struktur HTML di atas Grid
+            if (prevElement) {
+                if (prevElement.classList.contains('hangeul-section-description')) {
+                    descElement = prevElement;
+                    // Jika ada deskripsi, judulnya ada di atas deskripsi
+                    if (descElement.previousElementSibling && descElement.previousElementSibling.classList.contains('hangeul-section-title')) {
+                        titleElement = descElement.previousElementSibling;
+                    }
+                } else if (prevElement.classList.contains('hangeul-section-title')) {
+                    titleElement = prevElement;
+                }
+            }
+
+            // Aksi Tampilkan/Sembunyikan Section
+            if (visibleCount > 0) {
+                grid.style.display = ""; // Grid Muncul
+                if (titleElement) titleElement.style.display = "";
+                if (descElement) descElement.style.display = "";
+            } else {
+                grid.style.display = "none"; // Grid Hilang
+                if (titleElement) titleElement.style.display = "none";
+                if (descElement) descElement.style.display = "none";
+            }
+        });
+    });
 </script>
 
 @endsection

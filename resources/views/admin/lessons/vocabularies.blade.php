@@ -1,11 +1,12 @@
-@extends('admin.layouts.dashboard') 
+@extends('admin.layouts.dashboard')
 
 @section('title', 'Kelola Materi')
 
 @section('admin.content')
 <p></p>
-<div class="container-fluid ">
+<div class="container-fluid">
 
+    {{-- HEADER --}}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div>
             <h1 class="h3 mb-0 text-gray-800">Kelola Kosakata</h1>
@@ -21,6 +22,7 @@
     @endif
 
     <div class="row">
+        {{-- FORM TAMBAH (KIRI) --}}
         <div class="col-md-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -29,18 +31,25 @@
                 <div class="card-body">
                     <form action="{{ route('admin.lessons.vocabularies.store', $lesson->id) }}" method="POST">
                         @csrf
+                        
+                        {{-- SESUAIKAN NAME DENGAN MODEL (korean) --}}
                         <div class="form-group mb-3">
                             <label>Kata (Korea)</label>
-                            <input type="text" name="word_korean" class="form-control" placeholder="Contoh: 사과" required>
+                            <input type="text" name="korean" class="form-control" placeholder="Contoh: 사과" required>
                         </div>
+
+                        {{-- SESUAIKAN NAME DENGAN MODEL (meaning) --}}
                         <div class="form-group mb-3">
                             <label>Arti (Indonesia)</label>
                             <input type="text" name="meaning" class="form-control" placeholder="Contoh: Apel" required>
                         </div>
+
+                        {{-- SESUAIKAN NAME DENGAN MODEL (latin) --}}
                         <div class="form-group mb-3">
                             <label>Cara Baca (Romanization)</label>
-                            <input type="text" name="romanization" class="form-control" placeholder="Contoh: Sagwa">
+                            <input type="text" name="latin" class="form-control" placeholder="Contoh: Sagwa" required>
                         </div>
+
                         <button type="submit" class="btn btn-primary btn-block w-100">
                             <i class="fas fa-plus"></i> Simpan
                         </button>
@@ -49,6 +58,7 @@
             </div>
         </div>
 
+        {{-- TABEL DATA (KANAN) --}}
         <div class="col-md-8">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -68,14 +78,23 @@
                             <tbody>
                                 @forelse($lesson->vocabularies as $vocab)
                                 <tr>
-                                    <td class="h5 text-gray-800">{{ $vocab->word_korean }}</td>
+                                    {{-- PANGGIL VARIABEL SESUAI MODEL ($vocab->korean) --}}
+                                    <td class="h5 text-gray-800 font-weight-bold">
+                                        {{ $vocab->korean }}
+                                    </td>
+
                                     <td>{{ $vocab->meaning }}</td>
-                                    <td class="text-muted font-italic">{{ $vocab->romanization }}</td>
+
+                                    {{-- PANGGIL VARIABEL SESUAI MODEL ($vocab->latin) --}}
+                                    <td class="text-muted font-italic">
+                                        {{ $vocab->latin }}
+                                    </td>
+
                                     <td>
                                         <form action="{{ route('admin.vocabularies.delete', $vocab->id) }}" method="POST" onsubmit="return confirm('Hapus kosakata ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm">
+                                            <button class="btn btn-danger btn-circle btn-sm">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -83,7 +102,10 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted">Belum ada kosakata.</td>
+                                    <td colspan="4" class="text-center text-muted py-4">
+                                        <i class="fas fa-book-open fa-2x mb-3 text-gray-300"></i>
+                                        <p class="mb-0">Belum ada kosakata.</p>
+                                    </td>
                                 </tr>
                                 @endforelse
                             </tbody>
